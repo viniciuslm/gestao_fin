@@ -1,0 +1,14 @@
+{
+    "skip_files": [
+        "lib/gestao_fin/application.ex",
+        "lib/gestao_fin/orders/orders.ex",
+        "lib/gestao_fin_web.ex",
+        "lib/gestao_fin_web/telemetry.ex",
+        "lib/gestao_fin_web/views/error_helpers.ex",
+        "test/support/channel_case.ex",
+        "test/support/data_case.ex",
+    ],
+    "treat_no_relevant_line_as_covered": true,
+    "output_dir": "cover/",
+    "minimum_coverage": 95
+}
