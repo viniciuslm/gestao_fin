@@ -10,7 +10,17 @@ defmodule GestaoFin.MixProject do
       compilers: [:gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test
+      ],
+      preferred_cli_env: [
+        "test.watch": :test
+      ]
     ]
   end
 
@@ -47,7 +57,18 @@ defmodule GestaoFin.MixProject do
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 0.18"},
       {:jason, "~> 1.2"},
-      {:plug_cowboy, "~> 2.5"}
+      {:plug_cowboy, "~> 2.5"},
+      {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
+      {:excoveralls, "~> 0.10", only: :test},
+      {:sobelow, "~> 0.8", only: :dev},
+      {:dialyxir, "~> 0.5.0", only: [:dev, :test], runtime: false},
+      {:mix_test_watch, "~> 1.0", only: [:dev, :test], runtime: false},
+      {:ex_machina, "~> 2.7.0"},
+      {:faker, "~> 0.17", only: [:dev, :test]},
+      {:money, "~> 1.9"},
+      {:waffle, "~> 1.1"},
+      {:waffle_ecto, "~> 0.0"},
+      {:waffle_gcs, "~> 0.1", only: [:prod]}
     ]
   end
 
@@ -63,7 +84,11 @@ defmodule GestaoFin.MixProject do
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
-      "assets.deploy": ["esbuild default --minify", "phx.digest"]
+      "assets.deploy": [
+        "cmd --cd assets npm run deploy",
+        "esbuild default --minify",
+        "phx.digest"
+      ]
     ]
   end
 end
