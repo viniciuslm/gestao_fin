@@ -1,5 +1,16 @@
-<main class="container">
+<%= render GestaoFinWeb.LayoutView, "header.html", assigns %>
+<div class="flex overflow-hidden bg-white pt-16">
+
+  <%= render GestaoFinWeb.LayoutView, "sidebar.html", assigns %>
+  
+  <div id="main-content" class="h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-64">
+    <main>
+
   <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
   <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
   <%= @inner_content %>
-</main>
+  </main>
+  <%= render GestaoFinWeb.LayoutView, "footer.html", assigns %>
+</div>
+
+</div>
