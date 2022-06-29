@@ -17,7 +17,7 @@ defmodule GestaoFinWeb.Router do
   scope "/", GestaoFinWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    live "/pagar", PagarLive, :index
   end
 
   # Other scopes may use custom stacks.
