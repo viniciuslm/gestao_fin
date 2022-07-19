@@ -18,6 +18,17 @@ defmodule GestaoFinWeb.Router do
     pipe_through :browser
 
     live "/pagar", Contas.PagarLive, :index
+    live "/pagar/new", Contas.PagarLive, :new
+    live "/pagar/:id/edit", Contas.PagarLive, :edit
+    live "/pagar/:id/delete", Contas.PagarLive, :delete
+    live "/receber", Contas.ReceberLive, :index
+    live "/receber/new", Contas.ReceberLive, :new
+    live "/receber/:id/edit", Contas.ReceberLive, :edit
+    live "/receber/:id/delete", Contas.ReceberLive, :delete
+    live "/categoria", CategoriaLive, :index
+    live "/categoria/new", CategoriaLive, :new
+    live "/categoria/:id/edit", CategoriaLive, :edit
+    live "/categoria/:id/delete", CategoriaLive, :delete
   end
 
   # Other scopes may use custom stacks.
