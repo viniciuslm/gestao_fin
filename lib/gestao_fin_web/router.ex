@@ -10,9 +10,12 @@ defmodule GestaoFinWeb.Router do
     plug :put_secure_browser_headers
   end
 
+  # coveralls-ignore-start
   pipeline :api do
     plug :accepts, ["json"]
   end
+
+  # coveralls-ignore-stop
 
   scope "/", GestaoFinWeb do
     pipe_through :browser
@@ -31,6 +34,8 @@ defmodule GestaoFinWeb.Router do
     live "/categoria/:id/delete", CategoriaLive, :delete
   end
 
+  # coveralls-ignore-start
+
   # Other scopes may use custom stacks.
   # scope "/api", GestaoFinWeb do
   #   pipe_through :api
@@ -47,4 +52,6 @@ defmodule GestaoFinWeb.Router do
       forward "/mailbox", Plug.Swoosh.MailboxPreview
     end
   end
+
+  # coveralls-ignore-stop
 end
