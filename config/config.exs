@@ -11,7 +11,10 @@ config :gestao_fin,
   ecto_repos: [GestaoFin.Repo],
   generators: [binary_id: true]
 
-config :money, default_currency: :BRL
+config :money,
+  default_currency: :BRL,
+  separator: ".",
+  delimiter: ","
 
 # Configures the endpoint
 config :gestao_fin, GestaoFinWeb.Endpoint,
