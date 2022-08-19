@@ -1,5 +1,7 @@
 defmodule GestaoFinWeb.Contas.PagarLive do
   use GestaoFinWeb, :live_view
+
+  alias GestaoFin.Accounts
   alias GestaoFin.Contas.Pagar
   alias GestaoFin.ContasPagars
   alias GestaoFinWeb.ComponentLive.Delete
@@ -7,8 +9,9 @@ defmodule GestaoFinWeb.Contas.PagarLive do
   alias GestaoFinWeb.Contas.PagarLive.{Form, Row}
 
   @impl true
-  def mount(_p, _s, socket) do
-    {:ok, socket}
+  def mount(_params, %{"user_token" => user_token}, socket) do
+    {:ok,
+     assign_new(socket, :current_user, fn -> Accounts.get_user_by_session_token(user_token) end)}
   end
 
   @impl true

@@ -35,7 +35,7 @@ defmodule GestaoFinWeb.Contas.PagarLive.Form do
         {:noreply,
          socket
          |> put_flash(:info, "Conta a pagar criada!")
-         |> redirect(to: Routes.pagar_path(socket, :index))}
+         |> push_redirect(to: Routes.pagar_path(socket, :index))}
 
       {:error, changeset} ->
         {:noreply, assign(socket, :changeset, changeset)}
@@ -50,7 +50,7 @@ defmodule GestaoFinWeb.Contas.PagarLive.Form do
         {:noreply,
          socket
          |> put_flash(:info, "Conta a pagar atualizada!")
-         |> redirect(to: Routes.pagar_path(socket, :index))}
+         |> push_redirect(to: Routes.pagar_path(socket, :index))}
 
       {:error, changeset} ->
         {:noreply, assign(socket, :changeset, changeset)}

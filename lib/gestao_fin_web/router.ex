@@ -1,6 +1,8 @@
 defmodule GestaoFinWeb.Router do
   use GestaoFinWeb, :router
 
+  import GestaoFinWeb.UserAuth
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -8,6 +10,7 @@ defmodule GestaoFinWeb.Router do
     plug :put_root_layout, {GestaoFinWeb.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug :fetch_current_user
   end
 
   # coveralls-ignore-start
@@ -18,7 +21,7 @@ defmodule GestaoFinWeb.Router do
   # coveralls-ignore-stop
 
   scope "/", GestaoFinWeb do
-    pipe_through :browser
+    pipe_through [:browser, :require_authenticated_user]
 
     live "/pagar", Contas.PagarLive, :index
     live "/pagar/new", Contas.PagarLive, :new
@@ -54,4 +57,37 @@ defmodule GestaoFinWeb.Router do
   end
 
   # coveralls-ignore-stop
+
+  ## Authentication routes
+
+  scope "/", GestaoFinWeb do
+    pipe_through [:browser, :redirect_if_user_is_authenticated]
+
+    get "/users/register", UserRegistrationController, :new
+    post "/users/register", UserRegistrationController, :create
+    get "/", UserSessionController, :new
+    post "/users/log_in", UserSessionController, :create
+    get "/users/reset_password", UserResetPasswordController, :new
+    post "/users/reset_password", UserResetPasswordController, :create
+    get "/users/reset_password/:token", UserResetPasswordController, :edit
+    put "/users/reset_password/:token", UserResetPasswordController, :update
+  end
+
+  scope "/", GestaoFinWeb do
+    pipe_through [:browser, :require_authenticated_user]
+
+    get "/users/settings", UserSettingsController, :edit
+    put "/users/settings", UserSettingsController, :update
+    get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
+  end
+
+  scope "/", GestaoFinWeb do
+    pipe_through [:browser]
+
+    delete "/users/log_out", UserSessionController, :delete
+    get "/users/confirm", UserConfirmationController, :new
+    post "/users/confirm", UserConfirmationController, :create
+    get "/users/confirm/:token", UserConfirmationController, :edit
+    post "/users/confirm/:token", UserConfirmationController, :update
+  end
 end

@@ -28,11 +28,11 @@ defmodule GestaoFinWeb.CategoriaLive.Form do
 
   defp save(socket, :new, categoria_params) do
     case Categorias.create_categoria(categoria_params) do
-      {:ok, _product} ->
+      {:ok, _categoria} ->
         {:noreply,
          socket
          |> put_flash(:info, "Categoria criada!")
-         |> redirect(to: Routes.categoria_path(socket, :index))}
+         |> push_redirect(to: Routes.categoria_path(socket, :index))}
 
       {:error, changeset} ->
         {:noreply, assign(socket, :changeset, changeset)}
@@ -40,14 +40,14 @@ defmodule GestaoFinWeb.CategoriaLive.Form do
   end
 
   defp save(socket, :edit, categoria_params) do
-    product = socket.assigns.product
+    categoria = socket.assigns.categoria
 
-    case Categorias.update_categoria(product, categoria_params) do
-      {:ok, _product} ->
+    case Categorias.update_categoria(categoria, categoria_params) do
+      {:ok, _categoria} ->
         {:noreply,
          socket
          |> put_flash(:info, "Categoria atualizada!")
-         |> redirect(to: Routes.categoria_path(socket, :index))}
+         |> push_redirect(to: Routes.categoria_path(socket, :index))}
 
       {:error, changeset} ->
         {:noreply, assign(socket, :changeset, changeset)}

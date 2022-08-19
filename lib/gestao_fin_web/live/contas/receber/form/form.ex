@@ -35,7 +35,7 @@ defmodule GestaoFinWeb.Contas.ReceberLive.Form do
         {:noreply,
          socket
          |> put_flash(:info, "Conta a receber criada!")
-         |> redirect(to: Routes.receber_path(socket, :index))}
+         |> push_redirect(to: Routes.receber_path(socket, :index))}
 
       {:error, changeset} ->
         {:noreply, assign(socket, :changeset, changeset)}
@@ -50,7 +50,7 @@ defmodule GestaoFinWeb.Contas.ReceberLive.Form do
         {:noreply,
          socket
          |> put_flash(:info, "Conta a receber atualizada!")
-         |> redirect(to: Routes.receber_path(socket, :index))}
+         |> push_redirect(to: Routes.receber_path(socket, :index))}
 
       {:error, changeset} ->
         {:noreply, assign(socket, :changeset, changeset)}
