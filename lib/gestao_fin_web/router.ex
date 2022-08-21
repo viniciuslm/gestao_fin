@@ -23,6 +23,7 @@ defmodule GestaoFinWeb.Router do
   scope "/", GestaoFinWeb do
     pipe_through [:browser, :require_authenticated_user]
 
+    live "/", HomeLive, :index
     live "/pagar", Contas.PagarLive, :index
     live "/pagar/new", Contas.PagarLive, :new
     live "/pagar/:id/edit", Contas.PagarLive, :edit
@@ -65,7 +66,7 @@ defmodule GestaoFinWeb.Router do
 
     get "/users/register", UserRegistrationController, :new
     post "/users/register", UserRegistrationController, :create
-    get "/", UserSessionController, :new
+    get "/users/log_in", UserSessionController, :new
     post "/users/log_in", UserSessionController, :create
     get "/users/reset_password", UserResetPasswordController, :new
     post "/users/reset_password", UserResetPasswordController, :create

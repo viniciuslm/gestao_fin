@@ -1,26 +1,38 @@
-<h1>Register</h1>
+<div class="mx-auto md:h-screen flex flex-col justify-center items-center px-6 pt-8 pt:mt-0">
+  <a href="/" class="text-xl font-bold flex items-center lg:ml-2.5 text-green-700">
+    <img src={Routes.static_path(@conn, "/images/logo2.svg" )} class="h-6 mr-2" alt="Controle de Financeiro">
+    <span class="self-center whitespace-nowrap">Controle de Financeiro</span>
+  </a>
+  <!-- Card -->
+  <div class="bg-white shadow rounded-lg md:mt-0 w-full sm:max-w-screen-sm xl:p-0">
+    <div class="p-6 sm:p-8 lg:p-16 space-y-8">
+      <h2 class="text-2xl lg:text-3xl font-bold text-gray-900">Cadastrar</h2>
 
-<.form let={f} for={@changeset} action={Routes.user_registration_path(@conn, :create)}>
-  <%= if @changeset.action do %>
-    <div class="alert alert-danger">
-      <p>Oops, something went wrong! Please check the errors below.</p>
+      <.form let={f} for={@changeset} action={Routes.user_registration_path(@conn, :create)} class="mt-8 space-y-6">
+        <%= if @changeset.action do %>
+        <div class="alert alert-danger">
+          <p>Oops, something went wrong! Please check the errors below.</p>
+        </div>
+        <% end %>
+
+        <%= label f, :email, class: "text-sm font-medium text-gray-900 block mb-2" %>
+        <%= email_input f, :email, required: true, class: "bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" %>
+        <%= error_tag f, :email %>
+
+        <%= label f, :password, class: "text-sm font-medium text-gray-900 block mb-2" %>
+        <%= password_input f, :password, required: true, class: "bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" %>
+        <%= error_tag f, :password %>
+
+        <div>
+          <%= submit "Register", class: "text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-base px-5 py-3 w-full sm:w-auto text-center" %>
+        </div>
+      </.form>
+
+      <div class="text-sm font-medium text-gray-500">
+        <%= link "Log in", to: Routes.user_session_path(@conn, :new), class: "text-teal-500 hover:underline" %> |
+        <%= link "Forgot your password?", to: Routes.user_reset_password_path(@conn, :new), class: "text-teal-500 hover:underline" %>
+      </div>
+
     </div>
-  <% end %>
-
-  <%= label f, :email %>
-  <%= email_input f, :email, required: true %>
-  <%= error_tag f, :email %>
-
-  <%= label f, :password %>
-  <%= password_input f, :password, required: true %>
-  <%= error_tag f, :password %>
-
-  <div>
-    <%= submit "Register" %>
   </div>
-</.form>
-
-<p>
-  <%= link "Log in", to: Routes.user_session_path(@conn, :new) %> |
-  <%= link "Forgot your password?", to: Routes.user_reset_password_path(@conn, :new) %>
-</p>
+</div>

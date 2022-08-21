@@ -1,52 +1,47 @@
-
 <div class="mx-auto md:h-screen flex flex-col justify-center items-center px-6 pt-8 pt:mt-0">
-        <a href="/" class="text-xl font-bold flex items-center lg:ml-2.5 text-green-700">
-              <img src={Routes.static_path(@conn, "/images/logo2.svg")} class="h-6 mr-2" alt="Controle de Financeiro">
-              <span class="self-center whitespace-nowrap">Controle de Financeiro</span> 
-            </a>
-    <!-- Card -->
-    <div class="bg-white shadow rounded-lg md:mt-0 w-full sm:max-w-screen-sm xl:p-0">
-        <div class="p-6 sm:p-8 lg:p-16 space-y-8">
-            <h2 class="text-2xl lg:text-3xl font-bold text-gray-900">
-                Sign in to platform
-            </h2>
-            <.form let={f} for={@conn} action={Routes.user_session_path(@conn, :create)} as={:user}>
-              <%= if @error_message do %>
-                <div class="alert alert-danger">
-                  <p><%= @error_message %></p>
-                </div>
-              <% end %>
-
-              <div>
-                <%= label f, :email, class: "text-sm font-medium text-gray-900 block mb-2" %>
-                <%= email_input f, :email, required: true, class: "bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5", placeholder: "name@company.com" %>
-              </div>
-
-              <div>
-                <%= label f, :password, class: "text-sm font-medium text-gray-900 block mb-2" %>
-                <%= password_input f, :password, required: true,  placeholder: "••••••••", class: "bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" %>
-              </div>
-
-              <div class="flex items-start">
-                <div class="flex items-center h-5">
-                <%= checkbox f, :remember_me, class: "bg-gray-50 border-gray-300 focus:ring-3 focus:ring-cyan-200 h-4 w-4 rounded" %>
-                </div>
-                <div class="text-sm ml-3">
-                <%= label f, :remember_me, "Keep me logged in for 60 days", class: "font-medium text-gray-900" %>
-                </div>
-                <%= link "Forgot your password?", to: Routes.user_reset_password_path(@conn, :new),  class: "text-sm text-teal-500 hover:underline ml-auto" %>
-              </div>
-
-              <div>
-                <%= submit "Log in", class: "text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-base px-5 py-3 w-full sm:w-auto text-center" %>
-                <button type="submit">Login to your account</button>
-              </div>
-
-              <div class="text-sm font-medium text-gray-500">
-                  <%= link "Register", to: Routes.user_registration_path(@conn, :new), class: "text-teal-500 hover:underline" %>
-              </div>
-            </.form>
+  <a href="/" class="text-xl font-bold flex items-center lg:ml-2.5 text-green-700">
+    <img src={Routes.static_path(@conn, "/images/logo2.svg" )} class="h-6 mr-2" alt="Controle de Financeiro">
+    <span class="self-center whitespace-nowrap">Controle de Financeiro</span>
+  </a>
+  <!-- Card -->
+  <div class="bg-white shadow rounded-lg md:mt-0 w-full sm:max-w-screen-sm xl:p-0">
+    <div class="p-6 sm:p-8 lg:p-16 space-y-8">
+      <h2 class="text-2xl lg:text-3xl font-bold text-gray-900">Entrar na plataforma</h2>
+      <.form let={f} for={@conn} action={Routes.user_session_path(@conn, :create)} as={:user} class="mt-8 space-y-6">
+        <%= if @error_message do %>
+        <div class="alert alert-danger">
+          <p><%= @error_message %></p>
         </div>
-    </div>
-</div>
+        <% end %>
 
+        <div>
+          <%= label f, :email, "E-mail", class: "text-sm font-medium text-gray-900 block mb-2" %>
+          <%= email_input f, :email, required: true, class: "bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5", placeholder: "name@company.com" %>
+        </div>
+
+        <div>
+          <%= label f, :password, "Senha", class: "text-sm font-medium text-gray-900 block mb-2" %>
+          <%= password_input f, :password, required: true,  placeholder: "••••••••", class: "bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" %>
+        </div>
+
+        <div class="flex items-start">
+          <div class="flex items-center h-5">
+            <%= checkbox f, :remember_me, class: "bg-gray-50 border-gray-300 focus:ring-3 focus:ring-cyan-200 h-4 w-4 rounded" %>
+          </div>
+          <div class="text-sm ml-3">
+            <%= label f, :remember_me, "Manter logado nos próximos 60 dias", class: "font-medium text-gray-900" %>
+          </div>
+          <%= link "Esqueci a minha senha", to: Routes.user_reset_password_path(@conn, :new),  class: "text-sm text-teal-500 hover:underline ml-auto" %>
+        </div>
+
+        <div>
+          <%= submit "Logar", class: "text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-base px-5 py-3 w-full sm:w-auto text-center" %>
+        </div>
+
+        <div class="text-sm font-medium text-gray-500">
+          <%= link "Cadastrar", to: Routes.user_registration_path(@conn, :new), class: "text-teal-500 hover:underline" %>
+        </div>
+      </.form>
+    </div>
+  </div>
+</div>
