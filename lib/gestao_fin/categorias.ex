@@ -6,6 +6,12 @@ defmodule GestaoFin.Categorias do
 
   def list_categorias, do: Repo.all(Categoria)
 
+  def list_categorias_by_user_id(user_id) do
+    Categoria
+    |> where([c], c.user_id == ^user_id)
+    |> Repo.all()
+  end
+
   def list_categorias_ativas do
     Categoria
     |> where([c], c.ativo == true)

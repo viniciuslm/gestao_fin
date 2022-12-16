@@ -30,7 +30,7 @@
             </nav>
             <h1 class="text-xl sm:text-2xl font-semibold text-gray-900">Categorias</h1>
         </div>
-        <div class="block sm:flex items-center md:divide-x md:divide-gray-100">
+        <div class="block sm:flex items-center">
             <form action="#" method="GET">
                 <label for="products-search" class="sr-only">Search</label>
                 <div class="mt-1 relative sm:w-64 xl:w-96">
@@ -141,14 +141,15 @@
 
 <%= if @live_action in [:new, :edit] do %>
 <.modal titulo={"Categoria"} return_to={Routes.categoria_path(@socket, :index)}>
-    <.live_component module={Form} id={@categoria.id || :new} action={@live_action} categoria={@categoria}
-        return_to={Routes.categoria_path(@socket, :index)} />
+    <.live_component module={Form} id={@categoria.id || :new} action={@live_action} current_user={@current_user}
+        categoria={@categoria} return_to={Routes.categoria_path(@socket, :index)} />
 </.modal>
 <% end %>
 
 <%= if @live_action in [:delete] do %>
 <.modal_delete titulo={"Categoria"} return_to={Routes.categoria_path(@socket, :index)}>
-    <.live_component module={Delete} id={@categoria.id} action={@live_action} row={@categoria} mensagme={"Tem certeza
-        que deseja excluir a categoria?"} return_to={Routes.categoria_path(@socket, :index)} />
+    <.live_component module={Delete} id={@categoria.id} action={@live_action} current_user={@current_user}
+        row={@categoria} mensagem={"Tem certeza que deseja excluir a categoria?"}
+        return_to={Routes.categoria_path(@socket, :index)} />
 </.modal_delete>
 <% end %>

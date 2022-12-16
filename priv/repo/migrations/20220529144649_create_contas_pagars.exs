@@ -18,6 +18,14 @@ defmodule GestaoFin.Repo.Migrations.CreateContasPagars do
             null: false
           )
 
+      add :user_id,
+          references(:users,
+            on_delete: :nilify_all,
+            on_update: :nilify_all,
+            type: :binary_id,
+            null: false
+          )
+
       timestamps()
     end
 

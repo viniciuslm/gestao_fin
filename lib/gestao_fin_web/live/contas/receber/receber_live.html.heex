@@ -150,14 +150,15 @@
 
 <%= if @live_action in [:new, :edit] do %>
 <.modal titulo={"Contas a receber"} return_to={Routes.receber_path(@socket, :index)}>
-    <.live_component module={Form} id={@contas_receber.id || :new} action={@live_action}
+    <.live_component module={Form} id={@contas_receber.id || :new} action={@live_action} current_user={@current_user}
         contas_receber={@contas_receber} return_to={Routes.receber_path(@socket, :index)} />
 </.modal>
 <% end %>
 
 <%= if @live_action in [:delete] do %>
 <.modal_delete titulo={"Contas a receber"} return_to={Routes.receber_path(@socket, :index)}>
-    <.live_component module={Delete} id={@contas_receber.id} action={@live_action} row={@contas_receber} mensagme={"Tem
-        certeza que deseja excluir a conta a receber?"} return_to={Routes.receber_path(@socket, :index)} />
+    <.live_component module={Delete} id={@contas_receber.id} action={@live_action} current_user={@current_user}
+        row={@contas_receber} mensagem={"Tem certeza que deseja excluir a conta a receber?"}
+        return_to={Routes.receber_path(@socket, :index)} />
 </.modal_delete>
 <% end %>

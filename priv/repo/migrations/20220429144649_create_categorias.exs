@@ -8,6 +8,14 @@ defmodule GestaoFin.Repo.Migrations.CreateCatergorias do
       add :descricao, :string
       add :ativo, :boolean, default: true, null: false
 
+      add :user_id,
+          references(:users,
+            on_delete: :nilify_all,
+            on_update: :nilify_all,
+            type: :binary_id,
+            null: false
+          )
+
       timestamps()
     end
 

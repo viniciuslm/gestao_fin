@@ -10,6 +10,12 @@ defmodule GestaoFin.ContasPagars do
     |> Repo.all()
   end
 
+  def list_contas_pagar_by_user_id(user_id) do
+    Pagar
+    |> where([p], p.user_id == ^user_id)
+    |> Repo.all()
+  end
+
   def create_contas_pagar(attrs \\ %{}) do
     %Pagar{}
     |> Pagar.changeset(attrs)

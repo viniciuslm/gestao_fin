@@ -28,7 +28,8 @@ defmodule GestaoFinWeb.Contas.ReceberLive do
     sort = %{sort_by: sort_by, sort_order: sort_order}
 
     live_action = socket.assigns.live_action
-    contas_recebers = ContasRecebers.list_contas_receber()
+    user_id = socket.assigns.current_user.id
+    contas_recebers = ContasRecebers.list_contas_receber_by_user_id(user_id)
 
     assigns = [
       contas_recebers: contas_recebers,

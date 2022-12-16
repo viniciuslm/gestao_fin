@@ -28,7 +28,8 @@ defmodule GestaoFinWeb.Contas.PagarLive do
     sort = %{sort_by: sort_by, sort_order: sort_order}
 
     live_action = socket.assigns.live_action
-    contas_pagars = ContasPagars.list_contas_pagar()
+    user_id = socket.assigns.current_user.id
+    contas_pagars = ContasPagars.list_contas_pagar_by_user_id(user_id)
 
     assigns = [
       contas_pagars: contas_pagars,

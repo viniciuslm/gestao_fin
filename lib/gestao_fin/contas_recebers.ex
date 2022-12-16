@@ -10,6 +10,12 @@ defmodule GestaoFin.ContasRecebers do
     |> Repo.all()
   end
 
+  def list_contas_receber_by_user_id(user_id) do
+    Receber
+    |> where([r], r.user_id == ^user_id)
+    |> Repo.all()
+  end
+
   def create_contas_receber(attrs \\ %{}) do
     %Receber{}
     |> Receber.changeset(attrs)

@@ -6,7 +6,7 @@ defmodule GestaoFin.Accounts do
   import Ecto.Query, warn: false
   alias GestaoFin.Repo
 
-  alias GestaoFin.Accounts.{User, UserToken, UserNotifier}
+  alias GestaoFin.Accounts.{User, UserNotifier, UserToken}
 
   ## Database getters
 

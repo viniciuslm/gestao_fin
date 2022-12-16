@@ -1,7 +1,8 @@
 defmodule GestaoFin.Contas.Pagar do
   use Ecto.Schema
-  alias GestaoFin.Categorias.Categoria
   import Ecto.Changeset
+  alias GestaoFin.Accounts.User
+  alias GestaoFin.Categorias.Categoria
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
@@ -13,6 +14,7 @@ defmodule GestaoFin.Contas.Pagar do
     field :vencimento, :date
 
     belongs_to :categoria, Categoria
+    belongs_to :user, User
 
     timestamps()
   end
@@ -22,7 +24,7 @@ defmodule GestaoFin.Contas.Pagar do
   @doc false
   def changeset(pagar, attrs) do
     pagar
-    |> cast(attrs, [:titulo, :vencimento, :valor, :descricao, :paga, :categoria_id])
+    |> cast(attrs, [:titulo, :vencimento, :valor, :descricao, :paga, :categoria_id, :user_id])
     |> validate_required([:titulo, :vencimento, :valor, :categoria_id])
   end
 end

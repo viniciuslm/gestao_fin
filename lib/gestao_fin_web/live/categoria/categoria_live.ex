@@ -29,7 +29,8 @@ defmodule GestaoFinWeb.CategoriaLive do
     sort = %{sort_by: sort_by, sort_order: sort_order}
 
     live_action = socket.assigns.live_action
-    categorias = Categorias.list_categorias()
+    user_id = socket.assigns.current_user.id
+    categorias = Categorias.list_categorias_by_user_id(user_id)
 
     assigns = [
       categorias: categorias,
